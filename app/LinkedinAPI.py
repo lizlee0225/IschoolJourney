@@ -6,7 +6,7 @@ import oauth2
 
 CLIENT_ID = '86faisvke7rqht'
 CLIENT_SECRET = 'vfywuq3lwEUUqzU2'
-REDIRECT_URI = 'http://localhost:5000/index' #need to direct them to our main page
+REDIRECT_URI = 'http://localhost:5000' #need to direct them to our main page
 
 # OAuth endpoints given in the LinkedIn API documentation  
 authorization_base_url = 'https://www.linkedin.com/oauth/v2/authorization' #endpoint
@@ -35,7 +35,7 @@ def authorizeLinkedIn(code):
     print('------- FULL REPONSE -------')
     print(response)
 
-    print('------- SPOTIFY TOKEN RESPONSE -------')
+    print('------- LinkedIn TOKEN RESPONSE -------')
     print(decodedResponse)
 
     # SET USER SESSION WITH SPOTIFY ACCESS TOKEN & REFRESH TOKEN
@@ -47,7 +47,7 @@ def authorizeLinkedIn(code):
     responseToken['access_token'] = access_token
     responseToken['refresh_token'] = refresh_token
     responseToken['expires_in'] = expires_in
-    
+
     print('------- RESPONSE TOKEN -------')
     print(responseToken)
     return responseToken
