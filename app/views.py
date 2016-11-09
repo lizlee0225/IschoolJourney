@@ -13,23 +13,21 @@ REDIRECT_URI = 'http://localhost:5000/index' #temporary
 authorization_base_url = 'https://www.linkedin.com/oauth/v2/authorization'  
 token_url = 'https://www.linkedin.com/oauth/v2/accessToken'  
 
-myapp.secret_key = os.urandom(24)
+# myapp.secret_key = os.urandom(24)
 
 @myapp.route('/')
 def index():
     # Look for the User's Access Key in session
     try:
         access_token = token['access_token']
-        print
-        print '------- SPOTIFY ACCESS TOKEN:', access_token, '-------'
-        print
+        print ('------- LinkedIn ACCESS TOKEN:', access_token, '-------')
         spotifyPlaylists = spotifyAPI.getSpotifyPlaylists(access_token)
         return render_template("myPlaylists.html", playlists=spotifyPlaylists['data'])
     # If Access Key not available, begin User OAuth flow by redirecting User to Spotify Auth URL with appropriate parameters per Spotify API docs
     except:
         print
-        print '------- USER API ACCESS KEY NOT FOUND! -------'
-        print '------- PROMPTING USER FOR SPOTIFY AUTHORIZATION -------'
+        print ('------- USER API ACCESS KEY NOT FOUND! -------')
+        print ('------- PROMPTING USER FOR SPOTIFY AUTHORIZATION -------')
         print
         return redirect('/connect-spotify')
 
@@ -49,7 +47,7 @@ def spotifyToken():
     # GET CODE FROM REDIRECT URL
     code = request.args.get('code')
     # USE CODE TO GET AN ACCESS TOKEN FROM SPOTIFY API
-    token = spotifyAPI.authorizeSpotify(code)
+    token = spotifyAPI.authorizeLinkedIn(code)
     # REDIRECT USER TO INDEX ONCE USER IS AUTHORIZED
     return redirect('/')
 

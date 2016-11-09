@@ -32,14 +32,11 @@ def authorizeLinkedIn(code):
     response = requests.post(token_url, data=data, headers=headers)
     decodedResponse = response.json()
 
-    print
     print('------- FULL REPONSE -------')
     print(response)
 
-    print
     print('------- SPOTIFY TOKEN RESPONSE -------')
     print(decodedResponse)
-    print
 
     # SET USER SESSION WITH SPOTIFY ACCESS TOKEN & REFRESH TOKEN
     access_token = decodedResponse['access_token']
@@ -50,10 +47,9 @@ def authorizeLinkedIn(code):
     responseToken['access_token'] = access_token
     responseToken['refresh_token'] = refresh_token
     responseToken['expires_in'] = expires_in
-    print
+    
     print('------- RESPONSE TOKEN -------')
     print(responseToken)
-    print
     return responseToken
 
 # def getSpotifyPlaylists(access_token):
