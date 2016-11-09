@@ -1,0 +1,37 @@
+/*
+code adapted from 2016 FA INFO 290 TA project assignment
+*/
+.container {
+  background-color: #e04c1f;
+	box-shadow: 0 2px 40px 1px #a7a7a7;
+	color: #ecf0f1;
+	height: 5rem;
+}
+.brand-logo {
+    font-family: 'Arial', sans-serif !important;
+}
+
+.nav-options{
+    font-family: 'Arial', sans-serif !important;
+}
+
+.welcome {
+    background-image: url("southhall.jpg");
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    min-height: 700px !important;
+    background-position: center;
+}
+
+.welcome2 {
+    background-image: url("southhall.jpg");
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    min-height: 700px !important;
+    background-position: center;
+}
+
+.welcome_login{
+    /*margin-top: 20px !important;*/
+    padding: 20px !important;
+}

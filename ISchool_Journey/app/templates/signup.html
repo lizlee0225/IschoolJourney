@@ -1,0 +1,59 @@
+<!--
+code adapted from 2016 FA INFO 290 TA project assignment
+ -->
+{% extends "base.html" %}
+{% block navcontent %}
+<ul class="right">
+    <li><a href="{{ url_for('login') }}">Login</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<!-- Sign up page -->
+<section class="welcome">
+    <div class="container">
+        <div class="row col s8  blue lighten-3 welcome_login">
+
+            <h4>Welcome!</h4>
+            <p>Please sign up below!</p>
+
+            <!-- Signup form -->
+            <form action="" method="post" name="signup">
+                {{ form.hidden_tag() }}
+                <div class="section">
+                    <p>
+                        First Name:<br>
+                        {{form.fname(size=120)}}<br>
+                    </p>
+                    <p>
+                        Last Name:<br>
+                        {{form.lname(size=120)}}<br>
+                    </p>
+                    <p>
+                        Email:<br>
+                        {{form.email(size=120)}}<br>
+                    </p>
+                    <p>
+                        Password:<br>
+                        {{form.insecure_password(size=120)}}<br>
+                    </p>
+                </div>
+                <p>
+                    <button class="btn waves-effect waves-light teal lighten-2" type="submit" value="SignUp">
+                        Sign Up
+                    </button>
+                </p>
+            </form>
+
+
+            <!-- Error message display -->
+            {% if error %}
+            <p class="error red-text">
+                <strong> Error:</strong>
+                {{ error }}
+            </p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
