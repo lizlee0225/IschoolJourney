@@ -3,9 +3,7 @@ code adapted from 2016 FA INFO 290 TA project assignment
  -->
 {% extends "base.html" %}
 {% block navcontent %}
-<ul class="right">
-    <li><a href="{{ url_for('signup') }}">Sign up here!</a></li>
-</ul>
+
 {% endblock %}
 
 {% block content %}
@@ -21,23 +19,10 @@ code adapted from 2016 FA INFO 290 TA project assignment
             <form action="" method="post" name="login">
                 {{ form.hidden_tag() }}
                 <div class="section">
-                    <p>
-                        Email:<br>
-                        {{form.email(size=120)}}<br>
-                    </p>
-                    <p>
-                        Password:<br>
-                        {{form.insecure_password(size=120)}}<br>
-                    </p>
+                    <div class = "login-buttons-with-only-one-button">
+                        <img src = "../static/Sign-in.png" class = "login-button btn-Linkedin navbar-login" >
+                    </div>
                 </div>
-                <p>
-                    <button class="btn waves-effect waves-light teal lighten-2" type="submit" value="Login">
-                        Login
-                    </button>
-                </p>
-                <p>
-                  <script type="in/Login"></script>
-                </p>
             </form>
 
             <!-- Error message display -->
