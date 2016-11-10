@@ -89,8 +89,11 @@ def logout():
 @myapp.route('/main')
 def main():
 	if 'user' in session:
+		form = CareerForm(request.form)
 		user = escape(session['user'])
-		return render_template('main.html', user = user)
+		if form.validate_on_submit():
+			careers_name = form.careers_name.data
+		return render_template('main.html', user = user, form=form)
 	else: # login
 		return redirect('/login')
 
