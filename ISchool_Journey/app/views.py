@@ -5,12 +5,11 @@ from .forms import LoginForm, SignUpForm
 
 
 app = Flask(__name__)
-app.debug = True
-app.secret_key = 'development'
-oauth = OAuth(app)
+app.config.from_object('config')
+oauth = OAuth()
 
 linkedin = oauth.remote_app(
-	'linkedin',
+	'linkedIn',
 	consumer_key='86faisvke7rqht',
 	consumer_secret='vfywuq3lwEUUqzU2',
 	request_token_params={
@@ -23,15 +22,16 @@ linkedin = oauth.remote_app(
 	access_token_url='https://www.linkedin.com/uas/oauth2/accessToken',
 	authorize_url='https://www.linkedin.com/uas/oauth2/authorization',
 )
+
 @myapp.route('/')
 @myapp.route('/index')
 def index():
-	if user in session:
+	if 'linkedin_token' in session:
 		print("in session")
 		me = linkedin.get('people/~')
 		print(jsonify(me.data))
 		return jsonify(me.data)
-	return redirect(url_for('/login'))
+	return redirect(url_for('login'))
 
 
 # ------------ User Session Management ------------
@@ -66,6 +66,7 @@ def login():
 			else:
 				error = 'Invalid credentials'
 	return render_template('login.html', error = error, form = form)
+
 # @myapp.route('/')
 # @myapp.route('/index')
 # def index():
