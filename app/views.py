@@ -6,7 +6,7 @@ import urllib
 
 CLIENT_ID = '86faisvke7rqht'
 CLIENT_SECRET = 'vfywuq3lwEUUqzU2'
-REDIRECT_URI = 'http://localhost:5000' #temporary
+REDIRECT_URI = 'http://localhost:8081' #temporary
 
 # OAuth endpoints given in the LinkedIn API documentation  
 authorization_base_url = 'https://www.linkedin.com/oauth/v2/authorization'  
