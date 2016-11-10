@@ -17,3 +17,10 @@ class SignUpForm(Form):
 	insecure_password = PasswordField('password', [validators.required()])
 	fname = StringField('fname', [validators.required()])
 	lname = StringField('lname', [validators.required()])
+
+# class CareerForm(Form):
+#     careers_name = StringField('careers_name', [validators.required()])
+#     with sql.connect("app.db") as con:
+#         con.row_factory = sql.Row
+#         results = con.execute("SELECT * FROM careers").fetchall()
+#     career = SelectField(u'careers_name', choices = [ (str(item[1]), str(item[1])) for item in results])

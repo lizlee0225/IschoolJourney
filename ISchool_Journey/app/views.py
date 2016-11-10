@@ -1,44 +1,26 @@
+'''
+code adapted from 2016 FA INFO 290 TA project assignment
+'''
 from app import myapp, models
-from flask import render_template, Flask, redirect, url_for, session, request, jsonify, flash
-from flask_oauthlib.client import OAuth
-from .forms import LoginForm, SignUpForm
+from flask import render_template, redirect, request, session, url_for, escape, flash
+from .forms import LoginForm, SignUpForm, CareerForm
 
+"""
+View functions:
+* Handle logic on the front-end
+* Access the models file to use SQL functions
+"""
 
-app = Flask(__name__)
-app.config.from_object('config')
-oauth = OAuth()
-
-linkedin = oauth.remote_app(
-	'linkedIn',
-	consumer_key='86faisvke7rqht',
-	consumer_secret='vfywuq3lwEUUqzU2',
-	request_token_params={
-		'scope': 'r_basicprofile',
-		'state': 'RandomString',
-	},
-	base_url='https://api.linkedin.com/v1/',
-	request_token_url=None,
-	access_token_method='POST',
-	access_token_url='https://www.linkedin.com/uas/oauth2/accessToken',
-	authorize_url='https://www.linkedin.com/uas/oauth2/authorization',
-)
-
+# landing redirect
 @myapp.route('/')
 @myapp.route('/index')
 def index():
-	if 'linkedin_token' in session:
-		print("in session")
-		me = linkedin.get('people/~')
-		print(jsonify(me.data))
-		return jsonify(me.data)
-	return redirect(url_for('login'))
-
+	return redirect('/login')
 
 # ------------ User Session Management ------------
 # login
 @myapp.route('/login', methods=['GET', 'POST'])
 def login():
-
 	user = ''
 	error = None
 
@@ -67,66 +49,55 @@ def login():
 				error = 'Invalid credentials'
 	return render_template('login.html', error = error, form = form)
 
-# @myapp.route('/')
-# @myapp.route('/index')
-# def index():
-#     print("YAY")
-#     return redirect(url_for('/login'))
+# sign up
+@myapp.route('/signup', methods=['GET', 'POST'])
+def signup():
+	user = ''
+	error = None
 
-# @app.route('/')
-# @myapp.route('/index')
-# def index():
-#     print("YAY")
-#     if 'linkedin_token' in session:
-#         print("in session")
-#         me = linkedin.get('people/~')
-#         print(jsonify(me.data))
-#         return jsonify(me.data)
-#     return redirect(url_for('/login'))
+	# if already logged in, redirect to the trips overview
+	if 'user' in session:
+		user = escape(session['user'])
+		return redirect('/trips')
+	else: # sign up
+		form = SignUpForm()
+		if form.validate_on_submit():
+			error = None
 
+			# user input
+			email = form.email.data
+			pwd = form.insecure_password.data
+			fname = form.fname.data
+			lname = form.lname.data
 
-# @app.route('/login')
-# def login():
-#     return linkedin.authorize(callback=url_for('authorized', _external=True))
+			# insert the user into the database if the email address is not already associated with an account
+			if models.retrieve_user_id(email) is None:
+				user = models.signup_user(email, fname, lname, pwd)
+				return redirect('/login')
+			else:
+				error = 'An account with that email address already exits.'
+	return render_template('signup.html', error = error, form = form)
 
-
-# @app.route('/logout')
-# def logout():
-#     session.pop('linkedin_token', None)
-#     return redirect(url_for('/index'))
-
-
-# @app.route('/login/authorized')
-# def authorized():
-#     resp = linkedin.authorized_response()
-#     if resp is None:
-#         return 'Access denied: reason=%s error=%s' % (
-#             request.args['error_reason'],
-#             request.args['error_description']
-#         )
-#     session['linkedin_token'] = (resp['access_token'], '')
-#     me = linkedin.get('people/~')
-#     return jsonify(me.data)
+# logout
+@myapp.route('/logout')
+def logout():
+	session.pop('user', None)
+	flash('You were logged out')
+	return redirect(url_for('login'))
 
 
-# @linkedin.tokengetter
-# def get_linkedin_oauth_token():
-#     return session.get('linkedin_token')
+@myapp.route('/main')
+def main():
+	if 'user' in session:
+		user = escape(session['user'])
+		return render_template('main.html', user = user)
+	else: # login
+		return redirect('/login')
 
-
-# def change_linkedin_query(uri, headers, body):
-#     auth = headers.pop('Authorization')
-#     headers['x-li-format'] = 'json'
-#     if auth:
-#         auth = auth.replace('Bearer', '').strip()
-#         if '?' in uri:
-#             uri += '&oauth2_access_token=' + auth
-#         else:
-#             uri += '?oauth2_access_token=' + auth
-#     return uri, headers, body
-
-# linkedin.pre_request = change_linkedin_query
-
-
-# if __name__ == '__main__':
-#     app.run()
+@myapp.route('/select')
+def select():
+	if 'user' in session:
+		user = escape(session['user'])
+		return render_template('main2.html', user = user)
+	else: # login
+		return redirect('/login')

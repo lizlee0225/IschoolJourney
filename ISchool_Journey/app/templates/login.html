@@ -16,6 +16,34 @@ code adapted from 2016 FA INFO 290 TA project assignment
             <!-- Login form -->
             <form action="" method="post" name="login">
                 {{ form.hidden_tag() }}
+                <form action="" method="post" name="login">
+                    {{ form.hidden_tag() }}
+                    <div class="section">
+                        <p>
+                            Email:<br>
+                            {{form.email(size=120)}}<br>
+                        </p>
+                        <p>
+                            Password:<br>
+                            {{form.insecure_password(size=120)}}<br>
+                        </p>
+                    </div>
+                    <p>
+                        <button class="btn waves-effect waves-light blue lighten-2" type="submit" value="Login">
+                            Login
+                        </button>
+                    </p>
+                </form>
+
+                <!-- Error message display -->
+                {% if error %}
+                <p class="error red-text">
+                    <strong> Error:</strong>
+                    {{ error }}
+                </p>
+                {% endif %}
+
+            </div>
                 <div class="section">
                     <div class = "login-buttons-with-only-one-button">
                         <button class = "linkedin_button" type="submit" value="Login">
@@ -24,7 +52,7 @@ code adapted from 2016 FA INFO 290 TA project assignment
                     </div>
                 </div>
             </form>
-
+            <script type="in/Login"> Test </script>
             <!-- Error message display -->
             {% if error %}
             <p class="error red-text">
