@@ -10,20 +10,18 @@ code adapted from 2016 FA INFO 290 TA project assignment
 <!-- Login page -->
 <section class="welcome">
     <div class="container">
-        <div class="row col s8 blue lighten-3 welcome_login">
+        <div class="row col s4 welcome_login">
 
-            <h4>Welcome!</h4>
-            <p>Please log in to IRateISchool: </p>
-
+            <h4>Welcome to the IRateISchool!</h4>
             <!-- Login form -->
             <form action="" method="post" name="login">
                 {{ form.hidden_tag() }}
                 <div class="section">
                     <div class = "login-buttons-with-only-one-button">
-                        <button type="submit" value="Login">
+                        <button class = "linkedin_button" type="submit" value="Login">
                         <img src = "../static/Sign-in.png" class = "login-button btn-Linkedin navbar-login" >
                         </button>
-                    </div>                 
+                    </div>
                 </div>
             </form>
 

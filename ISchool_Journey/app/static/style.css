@@ -1,11 +1,12 @@
-/*
-code adapted from 2016 FA INFO 290 TA project assignment
-*/
+.linkedin_button {
+  padding: 0;
+  border: none;
+  background: none;
+}
 .container {
-  background-color: #e04c1f;
-	box-shadow: 0 2px 40px 1px #a7a7a7;
-	color: #ecf0f1;
 	height: 5rem;
+  width: 20px;
+  text-align: center;
 }
 .brand-logo {
     font-family: 'Arial', sans-serif !important;
