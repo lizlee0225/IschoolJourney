@@ -2,15 +2,28 @@
 code adapted from 2016 FA INFO 290 TA project assignment
 '''
 from app import myapp, models
-from flask import render_template, redirect, request, session, url_for, escape, flash
+from flask import render_template, Flask, redirect, url_for, session, request, jsonify, flash
+from flask_oauthlib.client import OAuth
 from .forms import LoginForm, SignUpForm, CareerForm
 
-"""
-View functions:
-* Handle logic on the front-end
-* Access the models file to use SQL functions
-"""
+app = Flask(__name__)
+app.config.from_object('config')
+oauth = OAuth()
 
+linkedin = oauth.remote_app(
+	'linkedIn',
+	consumer_key='86faisvke7rqht',
+	consumer_secret='vfywuq3lwEUUqzU2',
+	request_token_params={
+		'scope': 'r_basicprofile',
+		'state': 'RandomString',
+	},
+	base_url='https://api.linkedin.com/v1/',
+	request_token_url=None,
+	access_token_method='POST',
+	access_token_url='https://www.linkedin.com/uas/oauth2/accessToken',
+	authorize_url='https://www.linkedin.com/uas/oauth2/authorization',
+)
 # landing redirect
 @myapp.route('/')
 @myapp.route('/index')
