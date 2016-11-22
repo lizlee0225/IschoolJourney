@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, session, redirect, url_for, escape
+from flask import render_template, redirect, request, session, redirect, url_for, escape, Flask
 import sqlite3 as sql
 import os.path
 
@@ -8,11 +8,19 @@ app.database = 'career-map.db' # Name of database
 def connect_db():
     return sql.connect(app.database)
 
-def retrieve_class():
+def insert_userid(id):
+    ...
+
+def retrieve_course():
     # retrieve top 5 classes 
     g.db = connect_db() # g = flask specific temporary object during a request to store database connection
 
-def insert_review(review):
+def insert_course(course, ref):
+    # Users are able to recommend another course not in the list
+    ...
+
+
+def insert_review(review, ref):
     # Insert user's review in table course_reviews
     ...
 
@@ -73,3 +81,4 @@ def retrieve_order():
         cur = con.cursor()
         result3 = cur.execute("select * from orders").fetchall()
     return result3
+    """
