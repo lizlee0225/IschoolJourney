@@ -1,0 +1,54 @@
+.linkedin_button {
+  padding: 0;
+  border: none;
+  background: none;
+}
+.container {
+	height: 5rem;
+  max-height: 100%;
+  width: 20px;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  top: 10px;
+}
+.brand-logo {
+    font-family: 'Arial', sans-serif !important;
+}
+
+.nav-options{
+    font-family: 'Arial', sans-serif !important;
+}
+
+.welcome {
+    background-image: url("southhall.jpg");
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    min-height: 700px !important;
+    max-height: 100% !important;
+    background-position: center;
+}
+
+.welcome2 {
+    background-image: url("southhall.jpg");
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    min-height: 700px !important;
+    max-height: 100% !important;
+    background-position: center;
+}
+
+.welcome_login{
+    /*margin-top: 20px !important;*/
+    padding: 20px !important;
+}
+
+footer {
+	background-color: #006cb5;
+	bottom: 0;
+	color: #ecf0f1;
+	height: 7rem;
+	margin-top: 0;
+	text-align: center;
+	width: 100%;
+}

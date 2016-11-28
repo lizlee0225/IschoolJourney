@@ -1,0 +1,45 @@
+<!--
+code adapted from 2016 FA INFO 290 TA project assignment
+ -->
+{% extends "base.html" %}
+{% block navcontent %}
+<ul class="right">
+    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<!-- Display trips -->
+<section class="welcome2">
+  <div class="container">
+    <div class="row col s8">
+        <br><h4>Hello {{ user }}!</h4><br>
+        <div class="section">
+            <h5>Select your career path:</h5>
+            <!-- Dropdown Trigger -->
+            <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Careers</a>
+
+            <!-- Dropdown Structure -->
+            {{ form.careers }}
+              <ul id='dropdown1' class='dropdown-content'>
+                <li><a href="#!">Data Science</a></li>
+                <li class="divider"></li>
+                <li><a href="#!">Product Management</a></li>
+                <li class="divider"></li>
+                <li><a href="#!">Software Engineering</a></li>
+                <li class="divider"></li>
+                <li><a href="#!">UX/UI Design</a></li>
+                <li class="divider"></li>
+                <li><a href="#!">UX/UI Research</a></li>
+                <li class="divider"></li>
+              </ul>
+              <p>
+                  <button class="btn waves-effect waves-light blue lighten-2" type="submit" value="select">
+                      Select
+                  </button>
+              </p>
+        </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

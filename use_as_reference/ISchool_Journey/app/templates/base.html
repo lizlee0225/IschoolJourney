@@ -1,0 +1,33 @@
+<!--
+code adapted from 2016 FA INFO 290 TA project assignment
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-wrapper light-blue darken-3">
+            <a class="brand-logo center title">IRateISchool</a>
+            <div class="nav-options">
+                {% block navcontent %}{% endblock %}
+            </div>
+        </div>
+    </nav>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <link rel=stylesheet href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <script type="text/javascript" src="https://platform.linkedin.com/in.js">
+      api_key:   86faisvke7rqht
+    </script>
+</head>
+
+<body>
+    {% block content %}{% endblock %}
+    <script type="text/javascript", src="{{url_for('static', filename='main.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+</body>
+<footer>
+  <br>
+  <p>&copy; Copyright 2016 IRateISchool, all rights reserved</p>
+</footer>
+</html>
