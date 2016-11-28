@@ -7,6 +7,7 @@ database = 'career-map.db' # Name of database
 def connect_db():
     return sql.connect(database)
 
+# Need to get some sort of user id from linkedin to populate db
 def insert_userid(user_id):
     con = connect_db()
     con.execute('pragma foreign_keys = ON')
@@ -14,18 +15,30 @@ def insert_userid(user_id):
     cur.execute("INSERT INTO users (user_id) VALUES (?)",(user_id))
     con.commit()
 
-def retrieve_course():
-    # retrieve top 5 classes 
-    g.db = connect_db() # g = flask specific temporary object during a request to store database connection
-"""
-def insert_course(course, ref):
+def retrieve_course(concentration):
+    # retrieve top 5 classes per concentration
+    con = connect_db()
+    con.execute('pragma foreign_keys = ON')
+    cur = con.cursor()
+    results = cur.execute("SELECT course_name FROM courses_per_concentration_vw WHERE concentration_name = concentration").fetchall()
+    return results
+
+def insert_course(course_id, course, instructor):
     # Users are able to recommend another course not in the list
-    ...
+    con = connect_db()
+    con.execute('pragma foreign_keys = ON')
+    cur = con.cursor()
+    # Will course ref number increment automatically?
+    cur.execute("INSERT INTO courses (course_id, course_name, instructor) VALUES (?, ?, ?)",(course_id, course, instructor))
+    con.commit()
 
-
-def insert_review(review, ref):
+def insert_review(ref, user, review):
     # Insert user's review in table course_reviews
-    ...
+    con = connect_db()
+    con.execute('pragma foreign_keys = ON')
+    cur = con.cursor()
+    cur.execute("INSERT INTO course_reviews (ref, user_id, review_text) VALUES (?, ?, ?)", (ref, user, review))
+    con.commit()
 
 def retrieve_review():
     # display review retrieved from table course_review_vw
@@ -34,7 +47,7 @@ def retrieve_review():
 def retrieve_rating():
     # Retrieve average rating from database
     ...
-"""
+
 
 """
 def insert_data(company,email,phone,first_name,last_name,street_address,city,state,country,zip_code):

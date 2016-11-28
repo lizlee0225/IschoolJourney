@@ -1,13 +1,21 @@
-from app import myapp, models
+from app import app, models, db
+from .models import *
 from flask import render_template, Flask, redirect, url_for, session, request, jsonify, flash
 from flask_oauthlib.client import OAuth
 # from .forms import LoginForm, SignUpForm, CareerForm
 
-app = Flask(__name__)
+@app.route("/login")
+def login():
+    return render_template('login.html') 
 
-@app.route("/Test/<name>")
-def Test(name):
-    return render_template("Test.html", name=name) 
+@app.route("/index")
+def index():
+    return render_template('index.html')
+
+@app.route("/review")
+def review():
+    return render_template('review.html') 
+
 
 """
 app = Flask(__name__)
