@@ -2,19 +2,22 @@ from flask import render_template, redirect, request, session, redirect, url_for
 import sqlite3 as sql
 import os.path
 
-app = Flask(__name__)
-app.database = 'career-map.db' # Name of database
+database = 'career-map.db' # Name of database
 
 def connect_db():
-    return sql.connect(app.database)
+    return sql.connect(database)
 
-def insert_userid(id):
-    ...
+def insert_userid(user_id):
+    con = connect_db()
+    con.execute('pragma foreign_keys = ON')
+    cur = con.cursor() #associates sql connection, important because cursor allows us to execute sql statements
+    cur.execute("INSERT INTO users (user_id) VALUES (?)",(user_id))
+    con.commit()
 
 def retrieve_course():
     # retrieve top 5 classes 
     g.db = connect_db() # g = flask specific temporary object during a request to store database connection
-
+"""
 def insert_course(course, ref):
     # Users are able to recommend another course not in the list
     ...
@@ -31,7 +34,7 @@ def retrieve_review():
 def retrieve_rating():
     # Retrieve average rating from database
     ...
-
+"""
 
 """
 def insert_data(company,email,phone,first_name,last_name,street_address,city,state,country,zip_code):

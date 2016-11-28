@@ -1,16 +1,19 @@
-'''
-code adapted from 2016 FA INFO 290 TA project assignment
-'''
 from app import myapp, models
 from flask import render_template, Flask, redirect, url_for, session, request, jsonify, flash
 from flask_oauthlib.client import OAuth
 # from .forms import LoginForm, SignUpForm, CareerForm
 
 app = Flask(__name__)
+
+@app.route("/Test/<name>")
+def Test(name):
+    return render_template("Test.html", name=name) 
+
+"""
+app = Flask(__name__)
 app.config.from_object('config')
 oauth = OAuth()
 
-"""
 linkedin = oauth.remote_app(
 	'linkedIn',
 	consumer_key='86faisvke7rqht',
